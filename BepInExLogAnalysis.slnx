@@ -1,0 +1,11 @@
+<Solution>
+    <Folder Name="/Solution Files/">
+        <File Path=".gitignore" />
+        <File Path="global.json" />
+        <File Path="LICENSE" />
+        <File Path="README.md" />
+    </Folder>
+    <Project Path="BepInExLogAnalysis/BepInExLogAnalysis.csproj" />
+    <Project Path="BepInExLogAnalysis.Benchmark/BepInExLogAnalysis.Benchmark.csproj" />
+  <Project Path="BepInExLogAnalysis.Test/BepInExLogAnalysis.Test.csproj" />
+</Solution>
