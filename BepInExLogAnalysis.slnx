@@ -1,6 +1,7 @@
 <Solution>
     <Folder Name="/Solution Files/">
         <File Path=".gitignore" />
+        <File Path=".gitattributes" />
         <File Path="global.json" />
         <File Path="LICENSE" />
         <File Path="README.md" />

@@ -53,7 +53,7 @@ public static class Renderer
                 writer.WriteLine($"--- Loaded {pluginSection.Substring("Plugins/".Length)} plugins ---");
                 writer.WriteLine();
                 
-                RenderTable(writer, thePlugins);
+                RenderTable(writer, thePlugins, true);
                 
                 writer.WriteLine();
             }
@@ -149,9 +149,12 @@ public static class Renderer
         }
     }
 
-    private static void RenderTable(StreamWriter writer, List<List<string>> table)
+    private static void RenderTable(StreamWriter writer, List<List<string>> table, bool sortByFirst = false)
     {
         var columnSizes = new int[table.Select(row => row.Count).Max()];
+
+        if (sortByFirst)
+            table = table.OrderBy(x => x[0]).ToList();
 
         foreach (var row in table)
         {
@@ -192,16 +195,18 @@ public static class Renderer
         foreach (var (line, score) in scoredMessages)
         {
             gotAtLeastOne = true;
+
+            var textLineNumber = line.Line;
+
+            foreach (var textLine in ($"[{line.LogLevel,-7}:{line.Source,10}] " + line.Contents).Trim().Split('\n'))
+            {
+                writer.Write($"{textLineNumber,-4}");
+                writer.Write(" | ");
+                writer.WriteLine(textLine);
+
+                textLineNumber++;
+            }
             
-            writer.Write("  ");
-            writer.Write(line.Source);
-            writer.Write(" - ");
-            writer.Write(line.LogLevel);
-            writer.Write(" (");
-            writer.Write(score);
-            writer.Write(") Line #");
-            writer.WriteLine(line.Line);
-            writer.WriteLine(line.Contents.Trim().Replace("\n", "\n  "));
             writer.WriteLine();
         }
         
